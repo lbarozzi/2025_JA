@@ -1,0 +1,31 @@
+Laura: ciao! come è andata la verifica di scienze?
+Marco: un disastro! non ricordavo niente sul sistema nervoso
+Laura: mi dispiace! io ho studiato fino a tardi ieri
+Marco: si vedeva, sembravi preparatissima
+Laura: ma no, anche io ero nel panico, però credo di aver preso almeno 7
+Marco: beata te! io spero in un miracoloso 6 meno meno
+Laura: ma avevi studiato?
+Marco: poco, ero troppo preso dagli allenamenti di calcio
+Laura: capisco, è difficile gestire tutto
+Marco: già, ma la prossima volta mi organizzo meglio
+Laura: se vuoi ti posso aiutare, studio sempre con delle mappe concettuali che funzionano bene
+Marco: davvero? sarebbe fantastico!
+Laura: certo! magari per la prossima verifica studiamo insieme
+Marco: accetto volentieri! quando sarebbe la prossima?
+Laura: tra due settimane, sul sistema circolatorio
+Marco: ok, questa volta mi impegno sul serio
+Laura: bravo! vedrai che andrà meglio
+Marco: lo spero! comunque oggi in mensa c'era un cibo orribile
+Laura: lo so! ho preso solo l'insalata
+Marco: io ho mangiato un panino che mi ero portato da casa
+Laura: furbo! la prossima volta lo faccio anch'io
+Marco: comunque domani c'è l'assemblea di istituto
+Laura: sì, ci vai?
+Marco: certo, così saltiamo le lezioni!
+Laura: tipico di te! io vado perché mi interessa il tema sul bullismo
+Marco: in effetti è importante, ma ammetto che mi piace anche saltare matematica
+Laura: sei tremendo! ma ti capisco
+Marco: ci vediamo lì domani?
+Laura: sì, ci troviamo all'ingresso alle 8.30?
+Marco: perfetto! a domani
+Laura: a domani!

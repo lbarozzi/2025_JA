@@ -1,0 +1,9 @@
+Questo è un esempio di testo per testare l'applicazione di analisi delle parole.
+
+Il testo contiene parole normali e congiunzioni di vario tipo. Le congiunzioni semplici come e, anche, se, quindi permettono di collegare le frasi. Tuttavia, le congiunzioni avversative come ma, però, tuttavia, invece creano un contrasto tra le diverse parti del discorso.
+
+Quando leggiamo un testo, spesso non facciamo caso a quante congiunzioni utilizziamo, ma esse sono fondamentali per la struttura del discorso. Se proviamo a scrivere senza congiunzioni, il testo diventa frammentato. Dunque possiamo dire che le congiunzioni sono elementi essenziali.
+
+Questo esempio è stato creato per mostrare come l'applicazione possa analizzare un testo e distinguere tra parole normali, congiunzioni semplici e congiunzioni avversative.
+
+Anzi, possiamo affermare che le congiunzioni avversative come però, tuttavia e nonostante rendono il testo più articolato e complesso, permettendo di esprimere idee contrastanti.
