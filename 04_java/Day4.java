@@ -104,7 +104,7 @@ public class Day4 {
                 System.out.println("Exiting...");       
                 break;
             default:
-                System.out.println("Invalid choice. Please try again.");6
+                System.out.println("Invalid choice. Please try again.");
         }
         scanner.close();
     }
