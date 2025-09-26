@@ -1,5 +1,6 @@
 package it.eforhum.day10;
 
+import static  java.lang.Math.random;
 import java.time.LocalDateTime;
 
 /**
@@ -12,19 +13,19 @@ public class App {
         var oggi = LocalDateTime.now();
         // Aggiungi alcuni appuntamenti con date e orari casuali nel mese corrente
         agenda.aggiungiAppuntamento(new Appuntamento(
-            LocalDateTime.of(oggi.getYear(), oggi.getMonth(), (int)(Math.random()*28)+1, (int)(9+Math.random()*8), (int)(Math.random()*60)),
+            LocalDateTime.of(oggi.getYear(), oggi.getMonth(), (int)(random()*28)+1, (int)(9+random()*8), (int)(random()*60)),
             60, "Riunione team"));
         agenda.aggiungiAppuntamento(new Appuntamento(
-            LocalDateTime.of(oggi.getYear(), oggi.getMonth(), (int)(Math.random()*28)+1, (int)(9+Math.random()*8), (int)(Math.random()*60)),
+            LocalDateTime.of(oggi.getYear(), oggi.getMonth(), (int)(random()*28)+1, (int)(9+random()*8), (int)(random()*60)),
             90, "Presentazione progetto"));
         agenda.aggiungiAppuntamento(new Appuntamento(
-            LocalDateTime.of(oggi.getYear(), oggi.getMonth(), (int)(Math.random()*28)+1, (int)(9+Math.random()*8), (int)(Math.random()*60)),
+            LocalDateTime.of(oggi.getYear(), oggi.getMonth(), (int)(random()*28)+1, (int)(9+random()*8), (int)(random()*60)),
             30, "Call cliente"));
         agenda.aggiungiAppuntamento(new Appuntamento(
-            LocalDateTime.of(oggi.getYear(), oggi.getMonth(), (int)(Math.random()*28)+1, (int)(9+Math.random()*8), (int)(Math.random()*60)),
+            LocalDateTime.of(oggi.getYear(), oggi.getMonth(), (int)(random()*28)+1, (int)(9+random()*8), (int)(random()*60)),
             45, "Code review"));
         agenda.aggiungiAppuntamento(new Appuntamento(
-            LocalDateTime.of(oggi.getYear(), oggi.getMonth(), (int)(Math.random()*28)+1, (int)(9+Math.random()*8), (int)(Math.random()*60)),
+            LocalDateTime.of(oggi.getYear(), oggi.getMonth(), (int)(random()*28)+1, (int)(9+random()*8), (int)(random()*60)),
             120, "Workshop Java"));
 
         // Crea la vista e stampa l'agenda del mese corrente
