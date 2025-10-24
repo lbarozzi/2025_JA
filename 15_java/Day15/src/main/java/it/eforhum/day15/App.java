@@ -10,6 +10,7 @@ import java.util.Optional;
 import static java.lang.Math.random;
 import static java.lang.Math.PI;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.function.Consumer; 
 
@@ -21,7 +22,7 @@ public class App {
         int a=5;
         int b=10;
 
-        var Lista = new ArrayList<String>();
+        List<String> Lista = new ArrayList<String>();
         Lista.add("Ciao");
         Lista.add("pippo");
         Lista.add("pluto");
@@ -48,6 +49,7 @@ public class App {
             .sorted()
             .peek(System.err::println)
             .toList();
+            //.collect(Collectors.toList());
 
         ModLis.stream().forEach(System.out::println);
 
