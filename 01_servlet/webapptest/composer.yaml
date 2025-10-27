@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  webapp:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_NAME=todoapp
+      - DB_USER=root
+      - DB_PASSWORD=R3t1n0l0
+    networks:
+      - todo-network
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: todoapp
+      MYSQL_USER: todouser
+      MYSQL_PASSWORD: R3t1n0l0
+      MYSQL_ROOT_PASSWORD: R3t1n0l0
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./src/main/resources/database.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - todo-network
+
+volumes:
+  mysql_data:
+
+networks:
+  todo-network:
+    driver: bridge

@@ -1,0 +1,35 @@
+# -----------------------------
+# FASE 1: BUILD (COMPILAZIONE MAVEN)
+# -----------------------------
+# Usiamo Maven per compilare il codice
+FROM maven:3.9.5-eclipse-temurin-17 AS build
+
+# Imposta la directory di lavoro
+WORKDIR /usr/src/app
+
+# Copia il pom.xml e scarica le dipendenze per sfruttare la cache
+COPY pom.xml .
+RUN mvn dependency:go-offline
+
+# Copia il codice sorgente
+COPY src /usr/src/app/src
+
+# Compila l'applicazione e crea il file .war
+RUN mvn package -DskipTests
+
+# -----------------------------
+# FASE 2: FINALE (IMMAGINE JETTY)
+# -----------------------------
+# Usa l'immagine ufficiale di Jetty. Di solito usa Eclipse Temurin come base.
+FROM jetty/jetty:11-jdk17-temurin
+
+# La directory standard di deployment delle webapps in Jetty è /var/lib/jetty/webapps
+# Copia l'artefatto compilato dalla Fase 1 (build)
+# Nota: La webapp deve essere copiata come ROOT.war per essere eseguita come contesto radice (/)
+COPY --from=build /usr/src/app/target/webapptest.war /var/lib/jetty/webapps/ROOT.war
+
+# Espone la porta di default di Jetty (8080)
+EXPOSE 8080
+
+# Il comando CMD di default dell'immagine ufficiale è sufficiente per avviare Jetty
+# (es. CMD ["java", "-jar", "start.jar"])
