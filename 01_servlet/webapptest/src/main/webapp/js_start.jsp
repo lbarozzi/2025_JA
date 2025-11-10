@@ -22,6 +22,34 @@
             document.getElementById("message").innerHTML =
                 '<p id="p1">E... muti! <strong>JavaScript is working!</strong></p>';
             let count=0;
+
+            fetch("http://localhost:8080/webapptest/api/todos")
+                .then(response => response.json())
+                .then(data => {
+                    const todoList = document.getElementById("todolist");
+                    
+                    // Verifica che la risposta sia corretta
+                    if (data.success && data.todolist) {
+                        data.todolist.forEach(item => {
+                            const li = document.createElement("li");
+                            const text = item.title + (item.description ? " - " + item.description : "");
+                            li.textContent = text;
+                            if (item.completed) {
+                                li.style.textDecoration = "line-through";
+                                li.style.color = "#888";
+                            }
+                            todoList.appendChild(li);
+                        });
+                    } else {
+                        console.error('Invalid response format:', data);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching to-do items:', error);
+                    document.getElementById("message").innerHTML = 
+                        '<p style="color:red">Error fetching to-do items: ' + error.message + '</p>';
+                });
+
             function aggiornaContatore() {
                 count++;
                 document.getElementById("visitCount").innerText = count;

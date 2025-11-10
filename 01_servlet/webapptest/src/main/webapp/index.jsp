@@ -18,6 +18,8 @@
         <li><a href="todos.jsp">Gestione Todo List (JSP)</a></li>
         <li><a href="todos">Gestione Todo List (Servlet - deprecata)</a></li>
         <li><a href="hello">Servlet Hello</a></li>
+        <li><a href="js_start.jsp">JavaScript Start Page</a></li>
+        <li><a href="api/todos">Todo API Servlet</a></li>
     </ul>
 </div>
 </body>
