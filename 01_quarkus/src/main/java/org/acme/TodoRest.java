@@ -14,9 +14,13 @@ public class TodoRest {
 
     // GET all todos
     @GET
-    //public List<ToDoEntity> getAll() {
+    /*/ MPias way
+    public List<ToDoEntity> getAll() {
+        return ToDoEntity.listAll();
+    } 
+    //*/
+    // Another way
     public Response getAll() {
-        //return ToDoEntity.listAll();
         return Response.ok(ToDoEntity.listAll()).build();
     }
 
