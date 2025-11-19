@@ -14,8 +14,10 @@ public class TodoRest {
 
     // GET all todos
     @GET
-    public List<ToDoEntity> getAll() {
-        return ToDoEntity.listAll();
+    //public List<ToDoEntity> getAll() {
+    public Response getAll() {
+        //return ToDoEntity.listAll();
+        return Response.ok(ToDoEntity.listAll()).build();
     }
 
     // GET todo by id
