@@ -68,3 +68,29 @@ If you want to learn more about building native executables, please consult <htt
 Easily start your REST Web Services
 
 [Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)
+
+
+@Provider
+@ApplicationScoped
+public class JwtRemoteValidationFilter implements ContainerRequestFilter {
+
+    @Inject
+    @RestClient
+    JwtValidationService jwtValidationService; // interfaccia REST client verso la tua WebAPI
+
+    @Override
+    public void filter(ContainerRequestContext requestContext) {
+        String authHeader = requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED).build());
+            return;
+        }
+        String token = authHeader.substring("Bearer ".length());
+        
+        boolean valid = jwtValidationService.validateToken(token); // chiama API esterna
+        
+        if (!valid) {
+            requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED).build());
+        }
+    }
+}

@@ -1,0 +1,10 @@
+<li (click)="OnSelect()" style="cursor: pointer;">
+  <strong>Task {{ todo.id }}:</strong>
+  {{ todo.task }} - due by {{ todo.dueDate }}
+  @if(todo.completed) {
+    <span style="color: green;">(Completed)</span>
+  } @else {
+    <span style="color: red;">(Pending)</span>
+  }
+  <button style="margin-left: 10px;" (click)="onDelete()">&#x1F5D1;</button>
+</li>

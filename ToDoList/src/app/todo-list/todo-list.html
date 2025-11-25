@@ -1,0 +1,16 @@
+<div>
+  <h4>To-Do List</h4>
+<ol>
+    @for(todo of todos; track todo.id) {
+      <app-list-item [todo]="todo" (selected)="onTodoSelected($event)" (deleted)="onTodoDeleted($event)" (adding)="onTodoAdd($event)"></app-list-item>
+    }
+</ol>
+<input #newTaskInput type="text" placeholder="Antani con la sbiriguda" />
+<input type="date" #dueDateInput />
+<select #prioritySelect>
+  <option value="Low">Low</option>
+  <option value="Medium">Medium</option>
+  <option value="High">High</option>
+</select>
+<button (click)="onTodoAdd({task: newTaskInput.value, dueDate: dueDateInput.value, priority: prioritySelect.value}); newTaskInput.value=''">Add Task</button>
+</div>
