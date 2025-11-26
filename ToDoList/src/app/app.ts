@@ -40,10 +40,11 @@ export class App {
         console.log('Fetched IP address:', data.ip);
       }
     });
+
     let catsfacts='https://catfact.ninja/facts?limit=2' ;
-    this.http.get<{data:{fact:string}[]}>(catsfacts).subscribe({
+    this.http.get<{current_page:Number,data:{fact:string}[]}>(catsfacts).subscribe({
       next: (data) => {
-        console.log('Fetched cat facts:', data.data);
+        console.log('Fetched cat facts:', JSON.stringify(data.data));
       }
     });
     this.getFact();
