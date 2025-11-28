@@ -11,21 +11,17 @@
 <main class="main">
   <div class="content">
     <div class="left-side">
-
       <h1>{{ title() }}</h1>
       <p>Congratulations! Your app is running. 🎉</p>
       <p>Cat Fact: {{ catfact() }}</p>
-      <p>Selected Task: {{ selectedTask() }}</p>
+      <a href="/about">info</a>
     </div>
     <div class="divider" role="separator" aria-label="Divider"></div>
     <div class="right-side">
-        <div>
-          <app-todo-list [todos]="ToDoList()" (selected)="onTodoSelected($event)"
-          (deleted)="onTodoDeleted($event)" (adding)="onTodoAdded($event)"></app-todo-list>
-        </div>
+       <router-outlet></router-outlet>
     </div>
   </div>
 </main>
 
 
-<router-outlet />
+

@@ -1,0 +1,5 @@
+<div>
+  <p>Selected Task: {{ selectedTask() }}</p>
+  <app-todo-list [todos]="ToDoList()" (selected)="onTodoSelected($event)"
+  (deleted)="onTodoDeleted($event)" (adding)="onTodoAdded($event)"></app-todo-list>
+</div>
