@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-
+import { Todo } from '../todo';
 @Component({
   selector: 'app-list-item',
   imports: [],
@@ -8,13 +8,10 @@ import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from 
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListItem {
-  @Input() todo!: {id: number, dueDate: string, task: string,
-    completed: boolean, priority: string};
-  @Output() selected = new EventEmitter<{id: number, dueDate: string, task: string,
-    completed: boolean, priority: string}>();
+  @Input() todo!: Todo;
+  @Output() selected = new EventEmitter<Todo>();
   @Output() deleted = new EventEmitter<number>();
-  @Output() adding = new EventEmitter<{id: number, dueDate: string, task: string,
-    completed: boolean, priority: string}>();
+  @Output() adding = new EventEmitter<Todo>();
   OnSelect() {
     console.log('Selected todo item:', this.todo.task);
     this.selected.emit(this.todo);

@@ -1,1 +1,11 @@
-<p>fact-list works!</p>
+<p class="Leo">fact-list works!</p>
+
+
+<ol>
+  @for(fact of facts(); track fact) {
+  <li>
+    {{ fact }}
+    <button (click)="onFactDeleted(fact)">&#x1F5D1;</button>
+  </li>
+  }
+</ol>

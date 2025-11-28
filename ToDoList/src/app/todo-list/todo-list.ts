@@ -1,5 +1,6 @@
 import { Component, Input, Output,EventEmitter } from '@angular/core';
 import { ListItem } from '../list-item/list-item';
+import { Todo } from '../todo';
 
 @Component({
   selector: 'app-todo-list',
@@ -8,13 +9,10 @@ import { ListItem } from '../list-item/list-item';
   styleUrl: './todo-list.css',
 })
 export class TodoList {
-  @Input() todos!: {id: number, dueDate: string, task: string,
-    completed: boolean, priority: string}[];
-    @Output() selected = new EventEmitter<{id: number, dueDate: string, task: string,
-    completed: boolean, priority: string}>();
+  @Input() todos!: Todo[];
+    @Output() selected = new EventEmitter<Todo>();
     @Output() deleted = new EventEmitter<number>();
-    @Output() adding = new EventEmitter<{id: number, dueDate: string, task: string,
-    completed: boolean, priority: string}>()
+    @Output() adding = new EventEmitter<Todo>()
 
   protected onTodoDeleted(todo_id: number) {
     console.log('Deleted todo item in App component with id:', todo_id);

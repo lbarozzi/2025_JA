@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { RouterOutlet } from '@angular/router';
 import { ListItem } from './list-item/list-item';
 import { TodoList } from "./todo-list/todo-list";
+import { Todo } from './todo';
 
 @Component({
   selector: 'app-root',
@@ -59,8 +60,7 @@ export class App {
       }
     });
   }
-  protected onTodoSelected(todo: {id: number, dueDate: string, task: string,
-    completed: boolean, priority: string}) {
+  protected onTodoSelected(todo: Todo) {
     console.log('Selected todo item in App component:', todo.task);
     this.selectedTask.set(todo.task);
     this.getFact();
@@ -70,8 +70,13 @@ export class App {
     console.log('Deleted todo item in App component with id:', todo_id);
     this.ToDoList.set(this.ToDoList().filter(todo => todo.id !== todo_id));
   }
-  protected onTodoAdded(todo: {id: number, dueDate: string, task: string,
-    completed: boolean, priority: string}) {
+  protected onTodoAdded(todo: Todo) {
+    if (todo.id==0) {
+      todo.id = this.ToDoList().length > 0 ? Math.max(...this.ToDoList().map(t => t.id)) + 1 : 1;
+    } else {
+      //Update existing todo
+      this.ToDoList.set(this.ToDoList().map(t => t.id === todo.id ? todo : t));
+    }
     console.log('Added todo item in App component:', todo.task);
     this.ToDoList.set([...this.ToDoList(), todo]);
   }
