@@ -1,14 +1,10 @@
 import { Component, signal, Output, EventEmitter, OnInit, inject} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { RouterOutlet } from '@angular/router';
-import { ListItem } from './list-item/list-item';
-import { TodoList } from "./todo-list/todo-list";
-import { Todo } from './todo';
-import { Listmanager } from "./listmanager/listmanager";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Listmanager]  ,
+  imports: [RouterOutlet, ]  ,
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
