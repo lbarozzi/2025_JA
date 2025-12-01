@@ -35,10 +35,11 @@ public class CatFactService {
         return catFacts.get(random.nextInt(catFacts.size()));
     }
 
-    public List<CatFact> getRandomFacts(int limit) {
+    public List<CatFact> getRandomFacts(int limit,int page) {
         loadCatFacts();
         List<CatFact> allFacts = new ArrayList<>(catFacts);
-        Collections.shuffle(allFacts);
-        return allFacts.subList(0, Math.min(limit, allFacts.size()));
+        //Collections.shuffle(allFacts);  //this make useless pagination
+        int base = (page - 1) * limit;  
+        return allFacts.subList(base, base+Math.min(limit, allFacts.size()));
     }
 }

@@ -20,7 +20,9 @@ public class CatFactResource {
 
     @GET
     @Path("/facts")
-    public List<CatFact> getFacts(@QueryParam("limit") @DefaultValue("10") int limit) {
-        return catFactService.getRandomFacts(limit);
+    public List<CatFact> getFacts(
+        @QueryParam("limit") @DefaultValue("10") int limit,
+        @QueryParam("page") @DefaultValue("1") int page) {
+        return catFactService.getRandomFacts(limit, page);
     }
 }
