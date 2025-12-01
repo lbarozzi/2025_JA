@@ -5,5 +5,6 @@ import { Listmanager  } from './listmanager/listmanager';
 
 export const routes: Routes = [
    { path: "about", component: About },
-   { path:"", component: Listmanager}
+   { path:"", component: Listmanager},
+   { path:"foo", outlet:"bar", component: App }
 ];

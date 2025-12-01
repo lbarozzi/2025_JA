@@ -14,11 +14,13 @@
       <h1>{{ title() }}</h1>
       <p>Congratulations! Your app is running. 🎉</p>
       <p>Cat Fact: {{ catfact() }}</p>
-      <a href="/about">info</a>
+      <a routerLink="/about" routerLinkActive="active">info</a>
     </div>
     <div class="divider" role="separator" aria-label="Divider"></div>
     <div class="right-side">
        <router-outlet></router-outlet>
+
+      <router-outlet name="foo"></router-outlet>
     </div>
   </div>
 </main>

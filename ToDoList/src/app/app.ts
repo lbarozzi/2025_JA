@@ -1,10 +1,11 @@
 import { Component, signal, Output, EventEmitter, OnInit, inject} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, RouterLinkWithHref, RouterLinkActive } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ]  ,
+  imports: [RouterOutlet, RouterLinkWithHref, RouterLinkActive]  ,
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
@@ -12,6 +13,12 @@ export class App {
   protected readonly title = signal('ToDoList');
   protected catfact = signal<string>('');
   protected http=inject(HttpClient);
+  protected router=inject(Router); // <-- inject Router
+
+  protected rotta():void {
+      this.router.navigate(['/about']);
+  }
+
    protected ngOnInit() {
     console.log('ng OnInit: App component initialized.');
     let myip='https://api.ipify.org?format=json' ;
