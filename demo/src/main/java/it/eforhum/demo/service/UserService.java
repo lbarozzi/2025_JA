@@ -1,8 +1,8 @@
 package it.eforhum.demo.service;
-import it.eforhum.demo.entity.User;
+import it.eforhum.demo.entity.Utente;
 
 public interface UserService {
-    User createUser(User user);
-    User findUserById(Long id);
-    User findUserByEmail(String email);
+    Utente createUser(Utente user);
+    Utente findUserById(Long id);
+    Utente findUserByEmail(String email);
 }
