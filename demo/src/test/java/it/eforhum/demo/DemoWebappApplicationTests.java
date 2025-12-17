@@ -1,4 +1,4 @@
-package it.efohum.demo;
+package it.eforhum.demo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

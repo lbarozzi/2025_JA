@@ -1,4 +1,4 @@
-package it.efohum.demo.service;
+package it.eforhum.demo.service;
 
 import org.springframework.stereotype.Service;
 
@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 public class PasswdServiceImpl implements PasswdService {
     @Override
     public String hashPassword(String plainPassword) {
-        // Simple hashing example (not secure, for demonstration purposes only)
+        
         try {
             java.security.MessageDigest md = java.security.MessageDigest.getInstance("SHA-256");
             byte[] hash = md.digest(plainPassword.getBytes(java.nio.charset.StandardCharsets.UTF_8));
