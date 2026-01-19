@@ -1,0 +1,144 @@
+version: '3.8'
+
+services:
+  # ===================
+  # DATABASE MySQL
+  # ===================
+  mysql-db:
+    image: mysql:8.0
+    container_name: mysql-database
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "${MYSQL_PORT}:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./mysql/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    networks:
+      - microservices-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ===================
+  # BACKEND SERVICE 1 (Spring Boot)
+  # ===================
+  backend-service1:
+    build:
+      context: ./backend-service1
+      dockerfile: Dockerfile
+    container_name: spring-backend-1
+    restart: unless-stopped
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/${MYSQL_DATABASE}
+      SPRING_DATASOURCE_USERNAME: ${MYSQL_USER}
+      SPRING_DATASOURCE_PASSWORD: ${MYSQL_PASSWORD}
+      SERVER_PORT: 8080
+    ports:
+      - "${SPRING_SERVICE1_PORT}:8080"
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+    networks:
+      - microservices-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ===================
+  # BACKEND SERVICE 2 (Spring Boot)
+  # ===================
+  backend-service2:
+    build:
+      context: ./backend-service2
+      dockerfile: Dockerfile
+    container_name: spring-backend-2
+    restart: unless-stopped
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/${MYSQL_DATABASE}
+      SPRING_DATASOURCE_USERNAME: ${MYSQL_USER}
+      SPRING_DATASOURCE_PASSWORD: ${MYSQL_PASSWORD}
+      SERVER_PORT: 8080
+    ports:
+      - "${SPRING_SERVICE2_PORT}:8080"
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+    networks:
+      - microservices-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ===================
+  # BACKEND SERVICE 3 (Quarkus)
+  # ===================
+  backend-quarkus:
+    build:
+      context: ./backend-quarkus
+      dockerfile: Dockerfile
+    container_name: quarkus-backend
+    restart: unless-stopped
+    environment:
+      QUARKUS_DATASOURCE_JDBC_URL: jdbc:mysql://mysql-db:3306/${MYSQL_DATABASE}
+      QUARKUS_DATASOURCE_USERNAME: ${MYSQL_USER}
+      QUARKUS_DATASOURCE_PASSWORD: ${MYSQL_PASSWORD}
+      QUARKUS_HTTP_PORT: 8080
+    ports:
+      - "${QUARKUS_SERVICE_PORT}:8080"
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+    networks:
+      - microservices-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/q/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ===================
+  # FRONTEND (Angular)
+  # ===================
+  frontend-angular:
+    build:
+      context: ./frontend-angular
+      dockerfile: Dockerfile
+    container_name: angular-frontend
+    restart: unless-stopped
+    environment:
+      API_SERVICE1_URL: http://backend-service1:8080
+      API_SERVICE2_URL: http://backend-service2:8080
+      API_QUARKUS_URL: http://backend-quarkus:8080
+    ports:
+      - "${ANGULAR_PORT}:80"
+    depends_on:
+      - backend-service1
+      - backend-service2
+      - backend-quarkus
+    networks:
+      - microservices-network
+
+# ===================
+# NETWORKS
+# ===================
+networks:
+  microservices-network:
+    driver: bridge
+
+# ===================
+# VOLUMES
+# ===================
+volumes:
+  mysql-data:
+    driver: local
