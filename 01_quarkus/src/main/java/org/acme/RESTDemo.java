@@ -1,12 +1,18 @@
 package org.acme;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Size;
-import jakarta.ws.rs.*;
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.WebApplicationException;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
@@ -45,12 +51,17 @@ public class RESTDemo {
         public void setAge(Integer age) { 
             this.age = age; 
         }
+        @Override
+        public String toString() {
+            return String.format("UserDTO{name='%s', age=%d}", name, age); 
+        }
     }
     
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response createUser(@Valid UserDTO userDTO) {
+        System.out.println("Received user: " + userDTO.toString()   );
         return Response
             .status(Response.Status.CREATED)
             .entity(userDTO)
@@ -58,9 +69,9 @@ public class RESTDemo {
     }
 
     @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    public String demo() {
-        return "This is a REST endpoint in Quarkus";
+    @Produces(MediaType.APPLICATION_JSON)
+    public UserDTO demo() {
+        return  new UserDTO("Leonardo", 54);
     }
     
     @GET
